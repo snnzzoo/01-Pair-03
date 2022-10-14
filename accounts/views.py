@@ -73,7 +73,7 @@ def update(request):
             form.save()
             return redirect('accounts:detail', request.user.pk)
     else:
-        form = CustomUserChangeForm()
+        form = CustomUserChangeForm(instance=request.user)
     context = {
         'form': form
     }

@@ -2,10 +2,21 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-  <h1>accounts/login.html</h1>
-  <form action="" method="POST">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    <button class="btn btn-primary" type="submit">GO</button>
-  </form>
+
+  <div class="container d-flex justify-content-center my-5">
+    <div class="card col-8 bg-light">
+      <h1 class="text-center my-4 fs-3 fw-bold">Sign In</h1>
+      <div class="card-body">
+        <form action="" method="POST">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          <div class="mt-4">
+            <button class="btn btn-primary me-2" type="submit">GO</button>
+            <a class=" btn btn-outline-secondary" href="{% url 'index' %}" role="button">Back</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 {% endblock content %}

@@ -1,20 +1,53 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
+{% load static %}
 
 {% block content %}
-  <h1>Profile of
-    {{ user.username }}</h1>
-  <p>Name :
-    {{ user.first_name }}
-    {{ user.last_name }}</p>
-  <p>Email :
-    {{ user.email }}</p>
-  {% if request.user == user %}
-    <a class="btn btn-outline-primary" href="{% url 'accounts:update' %}" role="button">Edit</a>
-    <a class="btn btn-outline-success" href="{% url 'accounts:change_password' %}" role="button">Change Password</a>
-    <a class="btn btn-outline-secondary" href="{% url 'accounts:index' %}" role="button">Back</a>
-    <a class="btn btn-outline-danger" href="{% url 'accounts:delete' %}" role="button">Delete My Account</a>
-  {% else %}
-    <a class="btn btn-outline-secondary" href="{% url 'accounts:index' %}" role="button">Back</a>
-  {% endif %}
+  <div class="container d-flex flex-column align-items-center">
+    <div class="card mt-5 mb-4" style="width: 25rem;">
+      <div class="card-header text-bg-dark">
+        <h5 class="fs-3 fw-bold text-center my-1">
+          {{ user.username }}
+        </h5>
+      </div>
+      <div class="card-body d-flex justify-content-center">
+        <img src="{% static '프사.jpg' %}" class="card-img-top rounded-1" style="width: 20rem; height: 20rem;" alt="...">
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{ user.first_name }}
+          {{ user.last_name }}</li>
+        <li class="list-group-item">{{ user.email }}</li>
+      </ul>
+    </div>
+    {% if request.user == user %}
+      <div class="mb-5">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Edit
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="{% url 'accounts:update' %}" role="button">Edit My Info</a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'accounts:change_password' %}" role="button">Change Password</a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item text-danger" href="{% url 'accounts:delete' %}" role="button">Delete My Account</a>
+            </li>
+          </ul>
+        </div>
+        <a class=" btn btn-outline-secondary ms-3" href="{% url 'accounts:index' %}" role="button">Back</a>
+      </div>
+    {% else %}
+      <a class=" btn btn-outline-secondary" href="{% url 'accounts:index' %}" role="button">Back</a>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}
