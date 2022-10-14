@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+  <h1>accounts/index.html</h1>
+  {% for user in users %}
+    <h3>{{ user.username }}</h3>
+  {% endfor %}
+{% endblock content %}
