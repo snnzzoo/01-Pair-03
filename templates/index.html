@@ -1,0 +1,39 @@
+{% load django_bootstrap5 %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <title>221014 Pjt</title>
+    {% bootstrap_css %}
+    {% block css %}{% endblock %}
+    <style>
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+      }
+    </style>
+  </head>
+
+  <body class="bg-light">
+    <div class="container-fluid">
+      <h1>Welcome to MovieUs!</h1>
+      <a class="btn btn-success" href="{% url 'accounts:signup' %}" role="button">JOIN NOW</a>
+      <a class="btn btn-primary" href="{% url 'accounts:login' %}" role="button">Sign In</a>
+    </div>
+
+    <footer class="text-center my-5 text-muted">
+      Copyright 2022. 임선주
+    </footer>
+
+    {% bootstrap_javascript %}
+  </body>
+
+</html>
