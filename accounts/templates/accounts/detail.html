@@ -11,8 +11,9 @@
     {{ user.email }}</p>
   {% if request.user == user %}
     <a class="btn btn-outline-primary" href="{% url 'accounts:update' %}" role="button">Edit</a>
+    <a class="btn btn-outline-success" href="{% url 'accounts:change_password' %}" role="button">Change Password</a>
     <a class="btn btn-outline-secondary" href="{% url 'accounts:index' %}" role="button">Back</a>
-    <a class="btn btn-outline-danger" href="{% url 'accounts:change_password' %}" role="button">Change Password</a>
+    <a class="btn btn-outline-danger" href="{% url 'accounts:delete' %}" role="button">Delete My Account</a>
   {% else %}
     <a class="btn btn-outline-secondary" href="{% url 'accounts:index' %}" role="button">Back</a>
   {% endif %}

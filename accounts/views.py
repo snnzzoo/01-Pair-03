@@ -17,36 +17,44 @@ def index(request):
 
 
 def signup(request):
-    # POST 요청 처리
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('accounts:index')
+    # 이미 로그인 한 사람은 accounts:index로 보내기
+    if request.user.is_authenticated:
+        return redirect('accounts:index')
     else:
-        form = CustomUserCreationForm()
-    context = {
-        'form': form
-    }
-    return render(request, 'accounts/signup.html', context)
+        # POST 요청 처리
+        if request.method == 'POST':
+            form = CustomUserCreationForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                auth_login(request, user)
+                return redirect('accounts:index')
+        else:
+            form = CustomUserCreationForm()
+        context = {
+            'form': form
+        }
+        return render(request, 'accounts/signup.html', context)
     
 
 def login(request):
-    if request.method == 'POST':
-        # AuthenticationForm은 ModelForm이 아님
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            # 세션에 저장
-            # login 함수는 request, user 객체를 인자로 받음
-            # user 객체는 form에서 인증된 유저 정보
-            auth_login(request, form.get_user())
-            return redirect('accounts:index')
+    if request.user.is_authenticated:
+        return redirect('accounts:index')
     else:
-        form = AuthenticationForm()
-    context = {
-        'form': form
-    }
-    return render(request, 'accounts/login.html', context)
+        if request.method == 'POST':
+            # AuthenticationForm은 ModelForm이 아님
+            form = AuthenticationForm(request, data=request.POST)
+            if form.is_valid():
+                # 세션에 저장
+                # login 함수는 request, user 객체를 인자로 받음
+                # user 객체는 form에서 인증된 유저 정보
+                auth_login(request, form.get_user())
+                return redirect('accounts:index')
+        else:
+            form = AuthenticationForm()
+        context = {
+            'form': form
+        }
+        return render(request, 'accounts/login.html', context)
 
 
 def detail(request, pk):
@@ -88,5 +96,14 @@ def change_password(request):
     
 
 def logout(request):
+    auth_logout(request)
+    return redirect('index')
+
+
+@login_required
+def delete(request):
+    # 선 탈퇴
+    request.user.delete()
+    # 후 로그아웃
     auth_logout(request)
     return redirect('index')
