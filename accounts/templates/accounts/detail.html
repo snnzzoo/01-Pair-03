@@ -9,4 +9,10 @@
     {{ user.last_name }}</p>
   <p>Email :
     {{ user.email }}</p>
+  {% if request.user == user %}
+    <a class="btn btn-outline-primary" href="{% url 'accounts:update' %}" role="button">Edit</a>
+    <a class="btn btn-outline-secondary" href="{% url 'accounts:index' %}" role="button">Back</a>
+  {% else %}
+    <a class="btn btn-outline-secondary" href="{% url 'accounts:index' %}" role="button">Back</a>
+  {% endif %}
 {% endblock %}
