@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+  <h1>상세보기</h1>
+  <h5>{{ article.pk }}번째 게시글</h5>
+  <h1>{{ article.title }}</h1>
+  <p>Created :
+    {{ article.created_at }}
+    | Updated :
+    {{ article.updated_at }}</p>
+  <p>{{ article.content }}</p>
+  <a class=" btn btn-outline-primary" href="" role="button">Edit</a>
+  <a class=" btn btn-outline-danger" href="" role="button">Delete</a>
+{% endblock content %}

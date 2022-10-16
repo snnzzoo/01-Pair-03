@@ -4,7 +4,11 @@
 {% block content %}
   <h1>articles/index.html</h1>
   {% for article in articles %}
-    <h3>{{ article.title }}</h3>
+    <h3>
+      <a href="{% url 'articles:detail' article.pk %}">
+        {{ article.title }}
+      </a>
+    </h3>
     <p>Created :
       {{ article.created_at }}
       | Updated :
