@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+  <h1>articles/index.html</h1>
+  {% for article in articles %}
+    <h3>{{ article.title }}</h3>
+    <p>Created :
+      {{ article.created_at }}
+      | Updated :
+      {{ article.updated_at }}
+    </p>
+  {% endfor %}
+  <a class=" btn btn-primary" href="{% url 'articles:create' %}" role="button">Add</a>
+{% endblock content %}

@@ -57,6 +57,12 @@
               <a class="nav-link me-3" href="{% url 'accounts:index' %}">User</a>
             </li>
           </ul>
+          <!-- 로그인 => Username 출력 -->
+          <li class="nav-item">
+            <span class="text-light">Hello,</span>
+            <a class="navbar-brand nav-link mx-3" aria-current="page" href="#">{{ request.user.username }}</a>
+            <a class="nav-link me-3 text-light" href="{% url 'accounts:logout' %}">Sign Out</a>
+          </li>
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-search me-5" type="submit">Search</button>

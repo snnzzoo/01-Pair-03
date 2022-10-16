@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+  <h1>Add New Post</h1>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form article_form %}
+    <!-- {{ article_form.as_p }} -->
+    <button class="btn btn-primary" type="submit">Add</button>
+  </form>
+{% endblock content %}
