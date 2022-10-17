@@ -14,5 +14,5 @@
     <img src="{{ article.image.url }}" alt="{{ article.image }}">
   {% endif %}
   <a class=" btn btn-outline-primary" href="{% url 'articles:update' article.pk %}" role="button">Edit</a>
-  <a class=" btn btn-outline-danger" href="" role="button">Delete</a>
+  <a class=" btn btn-outline-danger" href="{% url 'articles:delete' article.pk %}" role="button">Delete</a>
 {% endblock content %}

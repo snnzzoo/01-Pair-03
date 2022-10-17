@@ -53,3 +53,8 @@ def update(request, pk):
         'article_form': article_form
     }
     return render(request, 'articles/update.html', context)
+
+
+def delete(request, pk):
+    Article.objects.get(pk=pk).delete()
+    return redirect('articles:index')
