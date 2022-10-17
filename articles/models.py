@@ -1,4 +1,6 @@
 from django.db import models
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
 
 """
 리뷰 제목 (30자 이하)
@@ -17,5 +19,10 @@ class Article(models.Model):
     grade = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField(upload_to='images/', blank=True)
+    # image = models.ImageField(upload_to='images/', blank=True)
+    image = ProcessedImageField(upload_to='images/', blank=True,
+                                processors=[ResizeToFill(400, 300)],
+                                format='JPEG',
+                                options={'quality': 100})
+    
 

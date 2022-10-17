@@ -21,7 +21,7 @@ def create(request):
         # 유효성 검사
         if article_form.is_valid():
             article_form.save()
-            return redirect('articles:index') # 나중에 글 상세보기 페이지로 변경
+            return redirect('articles/detail.html')
     else:
         # 유효하지 않은 경우
         # 이슈가 발생한 페이지를 보여주고 정정하라고 함
@@ -39,4 +39,17 @@ def detail(request, pk):
     }
     return render(request, 'articles/detail.html', context)
 
-    
+
+def update(request, pk):
+    article = Article.objects.get(pk=pk)
+    if request.method == 'POST':
+        article_form = ArticleForm(request.POST, request.FILES, instance=article)
+        if article_form.is_valid():
+            article_form.save()
+            return redirect('articles:detail', article.pk)
+    else:
+        article_form = ArticleForm(instance=article)
+    context = {
+        'article_form': article_form
+    }
+    return render(request, 'articles/update.html', context)
