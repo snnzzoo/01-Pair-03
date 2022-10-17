@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import ArticleForm
 from .models import Article
+from django.views.decorators.http import require_http_methods
 
 # Create your views here.
 def index(request):
@@ -10,12 +11,13 @@ def index(request):
     }
     return render(request, 'articles/index.html', context)
 
-
+@require_http_methods(['GET', 'POST'])
 def create(request):
     # GET이 아닌 POST 사용
     if request.method == 'POST':
         # DB에 저장
-        article_form = ArticleForm(request.POST)
+        article_form = ArticleForm(request.POST, request.FILES)
+        print(request.FILES)
         # 유효성 검사
         if article_form.is_valid():
             article_form.save()

@@ -10,6 +10,7 @@
     | Updated :
     {{ article.updated_at }}</p>
   <p>{{ article.content }}</p>
+  <img src="{{ article.image.url }}" alt="{{ article.image }}">
   <a class=" btn btn-outline-primary" href="" role="button">Edit</a>
   <a class=" btn btn-outline-danger" href="" role="button">Delete</a>
 {% endblock content %}
