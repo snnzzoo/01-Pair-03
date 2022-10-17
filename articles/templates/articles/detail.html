@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
+{% load static %}
 
 {% block content %}
   <h1>상세보기</h1>
+  <img src="{% static 'articles/카톡 프로필.jpg' %}" alt="img">
   <h5>{{ article.pk }}번째 게시글</h5>
   <h1>{{ article.title }}</h1>
   <p>Created :
