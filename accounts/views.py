@@ -17,9 +17,9 @@ def index(request):
 
 
 def signup(request):
-    # 이미 로그인 한 사람은 accounts:index로 보내기
+    # 이미 로그인 한 사람은 articles:index로 보내기
     if request.user.is_authenticated:
-        return redirect('accounts:index')
+        return redirect('articles:index')
     else:
         # POST 요청 처리
         if request.method == 'POST':
@@ -38,7 +38,7 @@ def signup(request):
 
 def login(request):
     if request.user.is_authenticated:
-        return redirect('accounts:index')
+        return redirect('articles:index')
     else:
         if request.method == 'POST':
             # AuthenticationForm은 ModelForm이 아님
@@ -48,7 +48,7 @@ def login(request):
                 # login 함수는 request, user 객체를 인자로 받음
                 # user 객체는 form에서 인증된 유저 정보
                 auth_login(request, form.get_user())
-                return redirect('accounts:index')
+                return redirect('articles:index')
         else:
             form = AuthenticationForm()
         context = {

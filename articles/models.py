@@ -25,4 +25,7 @@ class Article(models.Model):
                                 format='JPEG',
                                 options={'quality': 100})
     
-
+class Comment(models.Model):
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)

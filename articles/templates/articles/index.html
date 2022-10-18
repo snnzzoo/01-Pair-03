@@ -2,18 +2,31 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-  <h1>articles/index.html</h1>
-  {% for article in articles %}
-    <h3>
-      <a href="{% url 'articles:detail' article.pk %}">
-        {{ article.title }}
-      </a>
-    </h3>
-    <p>Created :
-      {{ article.created_at }}
-      | Updated :
-      {{ article.updated_at }}
-    </p>
-  {% endfor %}
-  <a class=" btn btn-primary" href="{% url 'articles:create' %}" role="button">Add</a>
-{% endblock content %}
+  <div class="container">
+    <h1 class="text-center my-5 fw-bold fs-2">All Posts</h1>
+    <a href="{% url 'articles:create' %}" class="btn btn-primary">Add</a>
+    <div class="row row-cols-1 row-cols-md-4 g-5 mt-1">
+      {% for article in articles %}
+        <div class="col my-4">
+          <a class="text-decoration-none" href="{% url 'articles:detail' article.pk %}">
+            <div class="card h-100">
+              <img src="{{ article.images.url }}" alt="{{ article.images }}" class="card-img-top">
+              <div class="card-body">
+                <h5 class="card-title">{{ article.title }}</h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Movie Name :
+                  {{ article.movie_name }}</li>
+                <li class="list-group-item">Rating :
+                  {{ article.grade }}</li>
+              </ul>
+              <div class="card-footer">
+                <small class="text-muted">Last updated :
+                  {{ article.updated_at }}</small>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  {% endblock content %}

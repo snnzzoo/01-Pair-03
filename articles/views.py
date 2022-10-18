@@ -17,11 +17,11 @@ def create(request):
     if request.method == 'POST':
         # DB에 저장
         article_form = ArticleForm(request.POST, request.FILES)
-        print(request.FILES)
+        # print(request.FILES)
         # 유효성 검사
         if article_form.is_valid():
             article_form.save()
-            return redirect('articles/detail.html')
+            return redirect('articles:index')
     else:
         # 유효하지 않은 경우
         # 이슈가 발생한 페이지를 보여주고 정정하라고 함
@@ -39,7 +39,7 @@ def detail(request, pk):
     }
     return render(request, 'articles/detail.html', context)
 
-
+@require_http_methods(['GET', 'POST'])
 def update(request, pk):
     article = Article.objects.get(pk=pk)
     if request.method == 'POST':
@@ -50,6 +50,7 @@ def update(request, pk):
     else:
         article_form = ArticleForm(instance=article)
     context = {
+        'article': article,
         'article_form': article_form
     }
     return render(request, 'articles/update.html', context)
