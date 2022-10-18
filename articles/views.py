@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import ArticleForm
-from .models import Article
+from .models import Article, Comment
 from django.views.decorators.http import require_http_methods
 
 # Create your views here.
@@ -35,7 +35,7 @@ def create(request):
 def detail(request, pk):
     article = Article.objects.get(pk=pk)
     context = {
-        'article': article
+        'article': article,
     }
     return render(request, 'articles/detail.html', context)
 

@@ -15,6 +15,14 @@
   {% if article.image %}
     <img src="{{ article.image.url }}" alt="{{ article.image }}">
   {% endif %}
+  <h5>Comments</h5>
+  <hr>
+  {% for comment in article.comment_set.all %}
+    <p>{{ comment.content }}</p>
+    <hr>
+    {% empty %}
+    <p>No comments yet.</p>
+  {% endfor %}
   <a class=" btn btn-outline-primary" href="{% url 'articles:update' article.pk %}" role="button">Edit</a>
   <a class=" btn btn-outline-danger" href="{% url 'articles:delete' article.pk %}" role="button">Delete</a>
 {% endblock content %}
